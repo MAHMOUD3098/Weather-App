@@ -15,7 +15,7 @@ class WeatherRemoteDataSource implements BaseWeatherRemoteDataSource {
     final response = await Dio().get('${AppConstants.baseUrl}?q=$countryName&appid=${AppConstants.apiKey}&units=metric');
 
     if (response.statusCode == 200) {
-      debugPrint(response.data);
+      debugPrint(response.data['weather']);
       return WeatherModel.fromJson(response.data);
     } else {
       throw ServerException(errorMessageModel: ErrorMessageModel.fromJson(response.data));
