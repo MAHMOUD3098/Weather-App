@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/utils/app_colors.dart';
+import 'package:weather_app/core/utils/app_strings.dart';
 import 'package:weather_app/presentation/cubits/home_cubit/cubit.dart';
 import 'package:weather_app/presentation/cubits/home_cubit/states.dart';
 import 'package:weather_app/presentation/widgets/custom_drawer.dart';
@@ -72,64 +73,77 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(
                         height: 50,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            // home.temperature.toString(),
-                            '0',
-                            style: TextStyle(
-                              fontSize: 60,
-                              color: Colors.white,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  // home.temperature.toString(),
+                                  '0${AppString.degreeSymbol}',
+                                  style: TextStyle(
+                                    fontSize: 60,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.wb_sunny_sharp,
+                                  size: 70,
+                                  color: AppColors.sunIconColor,
+                                ),
+                              ],
                             ),
-                          ),
-                          Icon(
-                            Icons.wb_sunny_sharp,
-                            size: 70,
-                            color: AppColors.sunIconColor,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: const [
-                          Text(
-                            'El Hay El Asher',
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
+                            Row(
+                              children: const [
+                                Text(
+                                  'El Hay El Asher',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.location_on_sharp,
+                                  color: Colors.white,
+                                ),
+                              ],
                             ),
-                          ),
-                          Icon(
-                            Icons.location_on_sharp,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      const Text(
-                        '34 / 24 Feels like 34',
-                        style: TextStyle(
-                          color: Colors.white,
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            const Text(
+                              '34${AppString.degreeSymbol} / 24${AppString.degreeSymbol} Feels like 34${AppString.degreeSymbol}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Text(
+                              'Sun, 2:55 pm',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(
-                        height: 10,
-                      ),
-                      const Text(
-                        'Sun, 2:55 pm',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                        height: 50,
                       ),
                       const HourlyWeatherContainer(),
                       const SizedBox(
-                        height: 50,
+                        height: 10,
                       ),
                       const TodayTemperatureContainer(),
                       const SizedBox(
-                        height: 50,
+                        height: 10,
                       ),
                       const DailyWeatherContainer()
                     ],
