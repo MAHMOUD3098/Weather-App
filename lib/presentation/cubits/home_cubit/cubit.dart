@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/error/failure.dart';
 import 'package:weather_app/domain/entities/weather.dart';
@@ -12,8 +13,15 @@ class HomeCubit extends Cubit<HomeStates> {
 
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
 
+  num temperature = 0;
   Future<Either<Failure, Weather>> getWeatherByCountryName(String countryName) async {
+    emit(HomeLoadingState());
     Either<Failure, Weather> response = await getWeatherByCountryNameUseCase.execute(countryName);
+    response.fold((l) => null, (r) {
+      debugPrint(r.toString());
+      temperature = r.temperature;
+    });
+        emit(HomeLoadedState());
     // emit(response.fold((l) => ErrorState, (r) => SuccessState));
     return response;
   }

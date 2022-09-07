@@ -17,8 +17,28 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // HomeCubit home = HomeCubit.get(context);
+    // home.getWeatherByCountryName('Egypt');
+
     return BlocConsumer<HomeCubit, HomeStates>(
-      listener: (context, state) => {},
+      listener: (context, state) => {
+        // if (state is HomeLoadingState)
+        //   {
+        //     ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //         content: Text('Loading ...'),
+        //       ),
+        //     ),
+        //   },
+        // if (state is HomeLoadedState)
+        //   {
+        //     ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //         content: Text('Loaded Successfully'),
+        //       ),
+        //     ),
+        //   }
+      },
       builder: (context, state) {
         return Container(
           decoration: BoxDecoration(
@@ -56,7 +76,8 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            '33',
+                            // home.temperature.toString(),
+                            '0',
                             style: TextStyle(
                               fontSize: 60,
                               color: Colors.white,
