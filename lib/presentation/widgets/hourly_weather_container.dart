@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/utils/app_colors.dart';
+import 'package:weather_app/presentation/widgets/humidity_icon.dart';
 
 class HourlyWeatherContainer extends StatelessWidget {
   const HourlyWeatherContainer({super.key});
@@ -9,7 +10,7 @@ class HourlyWeatherContainer extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
       width: double.infinity,
-      height: 200,
+      height: 180,
       decoration: BoxDecoration(
         color: AppColors.containerColor,
         borderRadius: BorderRadius.circular(25),
@@ -58,22 +59,7 @@ class HourlyWeatherContainer extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(
-                      Icons.water_drop,
-                      size: 14,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      '0%',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                )
+                const HumidityIcon(humidityPercentage: 0)
               ],
             ),
           );
