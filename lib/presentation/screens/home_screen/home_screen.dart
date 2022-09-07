@@ -17,7 +17,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomeCubit homeCubit = HomeCubit.get(context);
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) => {},
       builder: (context, state) {
@@ -42,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          homeCubit.openHomeDrawer(_scaffoldKey);
+                          // homeCubit.openHomeDrawer(_scaffoldKey);
                         },
                         child: const Icon(
                           Icons.density_medium_rounded,

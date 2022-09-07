@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/core/services/services_locator.dart';
 import 'package:weather_app/core/utils/app_strings.dart';
+import 'package:weather_app/presentation/cubits/home_cubit/cubit.dart';
 import 'package:weather_app/presentation/screens/home_screen/home_screen.dart';
 
 class Routes {
@@ -12,7 +15,10 @@ class AppRoutes {
     switch (routeSettings.name) {
       case Routes.initialRoute:
         return MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+          builder: (context) => BlocProvider(
+            create: (context) => sl<HomeCubit>(),
+            child: HomeScreen(),
+          ),
         );
 
       // case Routes.favoriteScreen:
