@@ -19,25 +19,26 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeCubit homeCubit = HomeCubit.get(context);
-    // homeCubit.getWeatherByCountryName('Egypt');
+    homeCubit.getWeatherByCountryName('Egypt');
+
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) => {
-        // if (state is HomeLoadingState)
-        //   {
-        //     ScaffoldMessenger.of(context).showSnackBar(
-        //       const SnackBar(
-        //         content: Text('Loading ...'),
-        //       ),
-        //     ),
-        //   },
-        // if (state is HomeLoadedState)
-        //   {
-        //     ScaffoldMessenger.of(context).showSnackBar(
-        //       const SnackBar(
-        //         content: Text('Loaded Successfully'),
-        //       ),
-        //     ),
-        //   }
+        if (state is HomeLoadingState)
+          {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Loading ...'),
+              ),
+            ),
+          },
+        if (state is HomeLoadedState)
+          {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Loaded Successfully'),
+              ),
+            ),
+          }
       },
       builder: (context, state) {
         return Container(
@@ -80,10 +81,9 @@ class HomeScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
-                                  // home.temperature.toString(),
-                                  '0${AppString.degreeSymbol}',
-                                  style: TextStyle(
+                                Text(
+                                  '${homeCubit.temperature.toInt()}${AppString.degreeSymbol}',
+                                  style: const TextStyle(
                                     fontSize: 60,
                                     color: Colors.white,
                                   ),
