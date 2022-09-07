@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/error/failure.dart';
 import 'package:weather_app/domain/entities/weather.dart';
@@ -21,14 +21,13 @@ class HomeCubit extends Cubit<HomeStates> {
       debugPrint(r.toString());
       temperature = r.temperature;
     });
-        emit(HomeLoadedState());
+    emit(HomeLoadedState());
     // emit(response.fold((l) => ErrorState, (r) => SuccessState));
     return response;
   }
 
-  // void openHomeDrawer(GlobalKey<ScaffoldState> scaffoldKey) {
-  //   scaffoldKey.currentState!.openDrawer();
-  //   emit(OpenHomeDrawerState());
-  // }
-
+  void openHomeDrawer(GlobalKey<ScaffoldState> scaffoldKey) {
+    scaffoldKey.currentState!.openDrawer();
+    emit(OpenHomeDrawerState());
+  }
 }

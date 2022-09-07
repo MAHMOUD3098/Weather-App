@@ -18,9 +18,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // HomeCubit home = HomeCubit.get(context);
-    // home.getWeatherByCountryName('Egypt');
-
+    HomeCubit homeCubit = HomeCubit.get(context);
+    // homeCubit.getWeatherByCountryName('Egypt');
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) => {
         // if (state is HomeLoadingState)
@@ -62,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          // homeCubit.openHomeDrawer(_scaffoldKey);
+                          homeCubit.openHomeDrawer(_scaffoldKey);
                         },
                         child: const Icon(
                           Icons.density_medium_rounded,
