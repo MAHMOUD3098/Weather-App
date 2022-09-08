@@ -19,7 +19,7 @@ class WeatherApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) {
-            return HomeCubit(getWeatherByCountryNameUseCase: sl()..baseWeatherRepository);
+            return HomeCubit(getWeatherByCountryNameUseCase: sl()..baseWeatherRepository, sl()..baseWeatherRepository);
           },
         ),
       ],

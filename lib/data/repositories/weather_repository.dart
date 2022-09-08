@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
+import 'package:geolocator_platform_interface/src/models/position.dart';
 import 'package:weather_app/core/error/exceptions.dart';
 import 'package:weather_app/core/error/failure.dart';
 import 'package:weather_app/data/datasources/weather_remote_data_source.dart';
@@ -16,6 +17,16 @@ class WeatherRepository extends BaseWeatherRepository {
   @override
   Future<Either<Failure, Weather>> getWeatherByCountryName(String countryName) async {
     final result = await baseWeatherRemoteDataSource.getWeatherByCountryName(countryName);
+    try {
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Weather>> getWeatherOfCurrentLocation(Position currentLocation) async {
+    final result = await baseWeatherRemoteDataSource.getWeatherOfCurrentLocation(currentLocation);
     try {
       return Right(result);
     } on ServerException catch (failure) {

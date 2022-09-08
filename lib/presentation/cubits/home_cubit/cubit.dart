@@ -5,12 +5,14 @@ import 'package:geolocator/geolocator.dart';
 import 'package:weather_app/core/error/failure.dart';
 import 'package:weather_app/domain/entities/weather.dart';
 import 'package:weather_app/domain/usecases/get_weather_by_country_name_usecase.dart';
+import 'package:weather_app/domain/usecases/get_weather_of_current_location_usecase.dart';
 import 'package:weather_app/presentation/cubits/home_cubit/states.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
   final GetWeatherByCountryNameUseCase getWeatherByCountryNameUseCase;
+  final GetWeatherOfCurrentLocationUseCase getWeatherOfCurrentLocationUseCase;
 
-  HomeCubit({required this.getWeatherByCountryNameUseCase}) : super(HomeInitialState());
+  HomeCubit(this.getWeatherOfCurrentLocationUseCase, {required this.getWeatherByCountryNameUseCase}) : super(HomeInitialState());
 
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
 
@@ -20,6 +22,18 @@ class HomeCubit extends Cubit<HomeStates> {
     response.fold((l) => null, (r) {
       debugPrint(r.toString());
       temperature = r.temperature;
+    });
+    return response;
+  }
+
+  String locationName = '';
+  Future<Either<Failure, Weather>> getWeatherOfCurrentLocation(Position currentLocation) async {
+    Either<Failure, Weather> response = await getWeatherOfCurrentLocationUseCase.execute(currentLocation);
+    response.fold((l) => null, (r) {
+      debugPrint(r.toString());
+      temperature = r.temperature;
+      locationName = r.country;
+      print(locationName);
     });
     return response;
   }
@@ -57,15 +71,12 @@ class HomeCubit extends Cubit<HomeStates> {
     currentLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
   }
 
-  void initData() async {
+  Future<void> initData() async {
     emit(HomeLoadingState());
-    await getWeatherByCountryName('Egypt').then(
-      (value) async {
-        await getGeoLocationPosition().then(
-          (value) => {
-            emit(HomeLoadedState()),
-          },
-        );
+    await getGeoLocationPosition().then(
+      (value) async => {
+        await getWeatherOfCurrentLocation(currentLocation!),
+        emit(HomeLoadedState()),
       },
     );
   }

@@ -20,6 +20,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     HomeCubit homeCubit = HomeCubit.get(context);
     homeCubit.initData();
+
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) async => {
         if (state is HomeLoadingState)
@@ -95,10 +96,10 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                             Row(
-                              children: const [
+                              children: [
                                 Text(
-                                  'El Hay El Asher',
-                                  style: TextStyle(
+                                  homeCubit.locationName,
+                                  style: const TextStyle(
                                     fontSize: 30,
                                     color: Colors.white,
                                   ),

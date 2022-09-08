@@ -3,6 +3,7 @@ import 'package:weather_app/data/datasources/weather_remote_data_source.dart';
 import 'package:weather_app/data/repositories/weather_repository.dart';
 import 'package:weather_app/domain/repositories/base_weather_repository.dart';
 import 'package:weather_app/domain/usecases/get_weather_by_country_name_usecase.dart';
+import 'package:weather_app/domain/usecases/get_weather_of_current_location_usecase.dart';
 import 'package:weather_app/presentation/cubits/app_cubit/cubit.dart';
 import 'package:weather_app/presentation/cubits/home_cubit/cubit.dart';
 
@@ -13,10 +14,11 @@ class ServicesLocator {
     //! Features
     // Blocs
     sl.registerFactory(() => WeatherAppCubit());
-    sl.registerFactory(() => HomeCubit(getWeatherByCountryNameUseCase: sl()));
+    sl.registerFactory(() => HomeCubit(getWeatherByCountryNameUseCase: sl(), sl()));
 
     //! UseCases
     sl.registerLazySingleton<GetWeatherByCountryNameUseCase>(() => GetWeatherByCountryNameUseCase(sl()));
+    sl.registerLazySingleton<GetWeatherOfCurrentLocationUseCase>(() => GetWeatherOfCurrentLocationUseCase(sl()));
 
     //! Repository
     sl.registerLazySingleton<BaseWeatherRepository>(() => WeatherRepository(baseWeatherRemoteDataSource: sl()));
