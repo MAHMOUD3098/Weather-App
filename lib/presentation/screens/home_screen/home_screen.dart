@@ -19,10 +19,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeCubit homeCubit = HomeCubit.get(context);
-    homeCubit.getWeatherByCountryName('Egypt');
-
+    homeCubit.initData();
     return BlocConsumer<HomeCubit, HomeStates>(
-      listener: (context, state) => {
+      listener: (context, state) async => {
         if (state is HomeLoadingState)
           {
             ScaffoldMessenger.of(context).showSnackBar(
